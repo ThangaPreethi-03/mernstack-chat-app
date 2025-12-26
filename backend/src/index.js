@@ -16,7 +16,7 @@ dotenv.config();
 console.log("DEBUG MONGO_URI =>", process.env.MONGO_URI);
 
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
 app.use(express.json());
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-server.listen(PORT, () => {
+server.listen(PORT, "0.0.0.0",() => {
   console.log("server is running on PORT:" + PORT);
   connectDB();
 });
