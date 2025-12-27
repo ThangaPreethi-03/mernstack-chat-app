@@ -10,7 +10,7 @@ import { app, server } from "./lib/socket.js";
 
 dotenv.config();
 
-// Debug check (optional – can remove later)
+// Optional debug (can remove later)
 console.log("DEBUG MONGO_URI =>", process.env.MONGO_URI);
 
 const PORT = process.env.PORT || 5000;
@@ -21,8 +21,8 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: true,        // allow any frontend (safe for now)
-    credentials: true,   // allow cookies / auth
+    origin: true,        // ✅ allows localhost + Vercel automatically
+    credentials: true,   // ✅ required for cookies/JWT
   })
 );
 
