@@ -10,7 +10,7 @@ import { app, server } from "./lib/socket.js";
 
 dotenv.config();
 
-const PORT = process.env.PORT; // ❗ DO NOT use fallback 5000
+const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -30,7 +30,8 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-server.listen(PORT, () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
   connectDB();
 });
+
