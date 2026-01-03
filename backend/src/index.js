@@ -10,31 +10,26 @@ import { app, server } from "./lib/socket.js";
 
 dotenv.config();
 
-// Optional debug (can remove later)
-console.log("DEBUG MONGO_URI =>", process.env.MONGO_URI);
+const PORT = process.env.PORT; // ❗ DO NOT use fallback 5000
 
-const PORT = process.env.PORT;
-
-/* -------------------- MIDDLEWARES -------------------- */
 app.use(express.json());
 app.use(cookieParser());
 
 app.use(
   cors({
-    origin: true,        // ✅ allows localhost + Vercel automatically
-    credentials: true,   // ✅ required for cookies/JWT
+    origin: "*",
+    credentials: true,
   })
 );
 
+// health check (VERY IMPORTANT)
 app.get("/", (req, res) => {
   res.send("Backend is alive");
 });
 
-/* -------------------- ROUTES -------------------- */
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-/* -------------------- SERVER START -------------------- */
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   connectDB();
