@@ -13,7 +13,7 @@ dotenv.config();
 // Optional debug (can remove later)
 console.log("DEBUG MONGO_URI =>", process.env.MONGO_URI);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 /* -------------------- MIDDLEWARES -------------------- */
 app.use(express.json());
@@ -31,7 +31,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
 /* -------------------- SERVER START -------------------- */
-server.listen(PORT, "0.0.0.0", () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   connectDB();
 });
